@@ -1,0 +1,159 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CTF-Windows内存取证 基础知识 | ZOFOA</title><meta name="description" content="CTF-Windows内存取证 基础知识"><meta name="keywords" content="CTF,内存取证"><meta name="author" content="ZOFOA"><meta name="copyright" content="ZOFOA"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.ico"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="CTF-Windows内存取证 基础知识"><meta name="twitter:description" content="CTF-Windows内存取证 基础知识"><meta name="twitter:image" content="https://i.loli.net/2019/04/23/5cbde7a93519f.jpg"><meta property="og:type" content="article"><meta property="og:title" content="CTF-Windows内存取证 基础知识"><meta property="og:url" content="https://zofoa.github.io/2019/04/22/CTF-Windows%E5%86%85%E5%AD%98%E5%8F%96%E8%AF%81-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"><meta property="og:site_name" content="ZOFOA"><meta property="og:description" content="CTF-Windows内存取证 基础知识"><meta property="og:image" content="https://i.loli.net/2019/04/23/5cbde7a93519f.jpg"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="https://zofoa.github.io/2019/04/22/CTF-Windows%E5%86%85%E5%AD%98%E5%8F%96%E8%AF%81-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"><link rel="prev" title="柔情似水 佳期如梦" href="https://zofoa.github.io/2019/04/25/%E6%9F%94%E6%83%85%E4%BC%BC%E6%B0%B4-%E4%BD%B3%E6%9C%9F%E5%A6%82%E6%A2%A6/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://zofoa.github.io/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: true  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="ZOFOA" type="application/atom+xml">
+</head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/ZOFOA/zofoa.github.io@latest/img/avatar.png" onerror="onerror=null;src='https://cdn.jsdelivr.net/gh/ZOFOA/zofoa.github.io@latest/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">8</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">7</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">3</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="http://192.168.0.128:5000" target="_blank" rel="noopener"><i class="fa-fw fa fa-hdd-o"></i><span> NAS</span></a></li><li><a class="site-page" href="http://192.168.0.128/wordpress" target="_blank" rel="noopener"><i class="fa-fw fa fa-wordpress"></i><span> WP</span></a></li></ul></div></div></div></div><i class="fa fa-arrow-right on" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#内存取证"><span class="toc-number">1.</span> <span class="toc-text">内存取证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#取证工具"><span class="toc-number">2.</span> <span class="toc-text">取证工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分析内存中隐藏的秘密"><span class="toc-number">3.</span> <span class="toc-text">分析内存中隐藏的秘密</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#获取内存镜像"><span class="toc-number">3.1.</span> <span class="toc-text">获取内存镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用Volatility对内存镜像进行分析"><span class="toc-number">3.2.</span> <span class="toc-text">使用Volatility对内存镜像进行分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看notepad-隐藏的重要信息"><span class="toc-number">3.3.</span> <span class="toc-text">查看notepad++隐藏的重要信息</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#全文结束"><span class="toc-number">4.</span> <span class="toc-text">全文结束</span></a></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(https://i.loli.net/2019/04/23/5cbde7a93519f.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">ZOFOA</a></span><span class="pull_right menus"><div id="search_button"><a class="site-page social-icon search"><i class="fa fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="http://192.168.0.128:5000" target="_blank" rel="noopener"><i class="fa-fw fa fa-hdd-o"></i><span> NAS</span></a></li><li><a class="site-page" href="http://192.168.0.128/wordpress" target="_blank" rel="noopener"><i class="fa-fw fa fa-wordpress"></i><span> WP</span></a></li></ul></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">CTF-Windows内存取证 基础知识</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2019-04-22 23:47:07"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2019-04-22</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2020-04-25 19:30:58"><i class="fa fa-history" aria-hidden="true"></i> 更新于 2020-04-25</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%94%B5%E5%AD%90%E5%8F%96%E8%AF%81/">计算机电子取证</a></span></div><div class="meta-secondline"> <span class="post-meta-wordcount"><i class="post-meta__icon fa fa-file-word-o" aria-hidden="true"></i><span>字数总计:</span><span class="word-count">1.4k</span><span class="post-meta__separator">|</span><i class="post-meta__icon fa fa-clock-o" aria-hidden="true"></i><span>阅读时长: 4 分钟</span></span></div><div class="meta-thirdline"><span class="post-meta-pv-cv"><span class="post-meta__separator">|</span><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div id="article-container"><blockquote>
+<p>本文主要介绍利用<strong><a href="https://www.volatilityfoundation.org/releases" target="_blank" rel="noopener">Volatility</a>内存取证工具</strong>对windows系统内存镜像进行分析。</p>
+</blockquote>
+<h2 id="内存取证"><a href="#内存取证" class="headerlink" title="内存取证"></a>内存取证</h2><p>内存取证是指通过对计算机<strong>物理内存</strong>和<strong>页面交换</strong>文件中进行<strong>查找</strong>、<strong>提取</strong>并进行<strong>分析</strong>，继而得到我们需要的证据的过程；可以形象的理解为将内存进程写入<strong>镜像文件</strong>，通过镜像文件查看之前内存进程的一些信息。</p>
+<h2 id="取证工具"><a href="#取证工具" class="headerlink" title="取证工具"></a>取证工具</h2><ul>
+<li><p>Volatility</p>
+<p><a href="https://www.volatilityfoundation.org/releases" target="_blank" rel="noopener">Volatility</a>是一款开源的，基于<code>Python</code>开发的内存取证工具集，可以分析内存中的各种数据。<code>Volatility</code>支持对32位或64位<code>Wnidow</code>、<code>Linux</code>、<code>Mac</code>、<code>Android</code>操作系统的RAM数据进行提取与分析。</p>
+</li>
+<li><p>DumpIt</p>
+<p><a href="https://qpdownload.com/dumpit/" target="_blank" rel="noopener">DumpIt</a> 是一款绿色免安装的 <code>windows</code> 内存镜像取证工具。利用它我们可以轻松地将一个系统的完整内存镜像下来，并用于后续的调查取证工作。下载后，直接双击运行 exe 文件，输入 y 并回车，软件就会在当前目录下保存内存镜像文件。</p>
+</li>
+<li><p>Procdump</p>
+<p>Windows平台下的命令行工具，可以在指定的条件下生成dump文件，主要用于高<code>CPU</code>占用率的性能分析优化，程序停止响应的调试，<code>First chance</code>异常捕获等，还可以监视内存使用、结合系统性能计数器使用，更详细介绍见<a href="https://docs.microsoft.com/zh-cn/sysinternals/downloads/procdump" target="_blank" rel="noopener">官方网站</a>。</p>
+<blockquote>
+<p>这里只记录一下常用用法。</p>
+</blockquote>
+<p>  在命令提示符下procdump -?可以查看全部参数的说明</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">这里列举几个常用的：</span><br><span class="line">-c/-cl: 监视CPU占用率阀值，-c为当CPU占用率高于该值时创建dump，-cl则在低于该值时创建dump。</span><br><span class="line">-u: 监视单核心的CPU占用率，与-c一起使用</span><br><span class="line">-s: 时间，以秒为单位，结合-c使用实现当连续N秒CPU占用高于某值时保存dump。</span><br><span class="line">-n: 设置数量，保存多个dump后才退出该程序。</span><br><span class="line">-h: 当进程中存在挂起窗口（不响应窗口消息）时创建dump。</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="分析内存中隐藏的秘密"><a href="#分析内存中隐藏的秘密" class="headerlink" title="分析内存中隐藏的秘密"></a>分析内存中隐藏的秘密</h2><h3 id="获取内存镜像"><a href="#获取内存镜像" class="headerlink" title="获取内存镜像"></a>获取内存镜像</h3><p>通过<code>dumplt</code>获取了一台<code>Server 2003</code>服务器的内存镜像，内存镜像<code>notepad++</code>中有一些重要信息,我们需要获取重要数据。</p>
+<p><img src="/" class="lazyload" data-src="https://i.loli.net/2019/04/23/5cbdf67dab668.png"  alt="Server 2003 内存镜像文件"></p>
+<h3 id="使用Volatility对内存镜像进行分析"><a href="#使用Volatility对内存镜像进行分析" class="headerlink" title="使用Volatility对内存镜像进行分析"></a>使用Volatility对内存镜像进行分析</h3><ul>
+<li><p><code>volatility</code><a href="https://github.com/volatilityfoundation/volatility/wiki/Command-Reference" target="_blank" rel="noopener">命令手册</a>，可访问该链接查看工具命令使用介绍。</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">常用的命令：</span><br><span class="line"></span><br><span class="line">cmdline/cmdscan   列出历史cmd命令</span><br><span class="line">filescan          扫描文件，可配合grep使用</span><br><span class="line">netscan           扫描建立的连接和套接字，类似于netstat</span><br><span class="line">pslist/psscan     列出进程列表</span><br><span class="line">svcscan           扫描windows服务列表</span><br><span class="line">screenshot        显示GDI样式的截屏</span><br><span class="line">memdump           从内存dump进程的内存</span><br><span class="line">dumpfiles         从内存dump文件</span><br><span class="line">connscan          建立的地址池连接</span><br><span class="line">-h或者–<span class="built_in">help</span>       列举出所有可用的选项以及插件</span><br><span class="line">–info             打印出所有已经注册的对象(插件)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>进入1.raw文件所在目录，使用volatility获取镜像基本信息。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">volatility -f 1.raw imageinfo</span><br><span class="line">imageinfo命令：用于查看我们正在分析的内存样本的摘要信息。具体来说显示主机所使用的操作系统版本、服务包以及硬件结构(32位或64位)、页目录表的起始地址和该获取该内存镜像的时间等基本信息。</span><br></pre></td></tr></table></figure>
+<p><img src="/" class="lazyload" data-src="https://i.loli.net/2019/04/23/5cbdf8e1ec1dd.png"  alt="内存样本摘要信息"></p>
+</li>
+<li><p>使用pslist命令查看当前镜像运行的进程信息。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">volatility -f 1.raw pslist --profile=Win2003SP1x86</span><br><span class="line">pslist命令: 可以枚举系统中的进程，这条命令通过遍历PsActiveProcessHead指针指向的双向链表枚举当前内存中活跃的所有进程信息，主要包括偏移地址、进程ID号、父进程ID号、线程数量、句柄数量、进程会话ID号以及进程开始和退出的时间。</span><br><span class="line">pslist: 无法显示隐藏/终止进程。</span><br><span class="line">psscan: 输出的内容会比pslist多。</span><br><span class="line">pstree: 扫描进程，以进程树的形式出现。</span><br></pre></td></tr></table></figure>
+<p><img src="/" class="lazyload" data-src="https://i.loli.net/2019/04/23/5cbdf9d719d7d.png"  alt="内存镜像中进程信息"></p>
+</li>
+<li><p>查看cmd 输入的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">volatility -f 1.raw --profile&#x3D;Win2003SP1x86 cmdscan</span><br><span class="line">cmdscan命令: 可以用来查看受害者系统上攻击者操作的最强大的命令之一，无论他们是否打开cmd.exe</span><br><span class="line">简单地说，您可以看到攻击者在命令提示符中键入的内容。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看可疑文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">volatility -f 1.raw --profile&#x3D;Win2003SP1x86 filescan</span><br><span class="line">filescan命令: 扫描当前打开的文件。配合 dumpfile有意想不到的效果 dumpfiles -D .&#x2F; -Q</span><br><span class="line">查看文档、图片、桌面文件</span><br><span class="line">volatility -f 1.raw --profile&#x3D;Win2003SP2x86 filescan | grep &quot;doc\|docx\|rtf&quot;</span><br><span class="line">volatility -f 1.raw --profile&#x3D;Win2003SP2x86 filescan | grep &quot;jpg\|jpeg\|png\|tif\|gif\|bmp&quot;</span><br><span class="line">volatility -f 1.raw --profile&#x3D;Win2003SP2x86 filescan | grep &quot;Desktop&quot;</span><br></pre></td></tr></table></figure>
+<p><img src="/" class="lazyload" data-src="https://i.loli.net/2019/04/23/5cbdfbe93e9ad.png"  alt="内存镜像中部分打开的文件"></p>
+</li>
+<li><p>查看命令行输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">volatility -f 1.raw --profile&#x3D;Win2003SP2x86 cmdline</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看系统用户名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">volatility -f 1.raw --profile&#x3D;Win2003SP2x86 printkey -K &quot;SAM\Domains\Account\Users\Names&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看网络连接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">volatility -f 1.raw --profile&#x3D;Win2003SP2x86 netscan</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>导出notepad++ 进程内存</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">volatility -f 1.raw --profile&#x3D;Win2003SP2x86 memdump -p 3324 --dump-dir&#x3D;.&#x2F;</span><br></pre></td></tr></table></figure>
+<p><img src="/" class="lazyload" data-src="https://i.loli.net/2019/04/23/5cbe002f1503c.png"  alt="导出notepad++进程文件"></p>
+</li>
+</ul>
+<h3 id="查看notepad-隐藏的重要信息"><a href="#查看notepad-隐藏的重要信息" class="headerlink" title="查看notepad++隐藏的重要信息"></a>查看notepad++隐藏的重要信息</h3><p>我们使用内存取证分析工具对内存镜像的一些基本信息进行了分析，发现了内存中存在<code>notepad++</code>进程，使用相关技术手段把<code>notepad++</code>进程导出<code>dmp</code>文件格式，下面我们使用二进制编辑器<a href="https://hexeditor.en.softonic.com/" target="_blank" rel="noopener">hexeditor</a>打开1188.dmp查看寻找隐藏的信息</p>
+<blockquote>
+<p>PS: 也可以使用 <code>strings</code> 这个工具将它的字符串打印出来</p>
+</blockquote>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">strings 1188.dmp &gt;  &gt;&gt;1188.txt</span><br><span class="line">strings 1188.dmp &gt; 3324.txt | grep flag</span><br></pre></td></tr></table></figure>
+<p> <img src="/" class="lazyload" data-src="https://i.loli.net/2019/04/23/5cbe002f6323a.png"  alt="notepad++进程隐藏的信息"></p>
+<p> 如上图所示，红框中的<code>flag</code>值就是我们需要重要数据。</p>
+<h2 id="全文结束"><a href="#全文结束" class="headerlink" title="全文结束"></a>全文结束</h2><blockquote>
+<p>谢谢大家观看！如有错误或其它技术交流问题，请留言反馈。</p>
+</blockquote>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ZOFOA</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://zofoa.github.io/2019/04/22/CTF-Windows%E5%86%85%E5%AD%98%E5%8F%96%E8%AF%81-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">https://zofoa.github.io/2019/04/22/CTF-Windows内存取证-基础知识/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://zofoa.github.io" target="_blank">ZOFOA</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CTF/">CTF</a><a class="post-meta__tags" href="/tags/%E5%86%85%E5%AD%98%E5%8F%96%E8%AF%81/">内存取证</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/ZOFOA/zofoa.github.io@latest/img/5.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="lazyload post-qr-code__img" src="https://cdn.jsdelivr.net/gh/ZOFOA/zofoa.github.io@latest/img/wechat.jpg" alt="微信"/><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="lazyload post-qr-code__img" src="https://cdn.jsdelivr.net/gh/ZOFOA/zofoa.github.io@latest/img/alipay.jpg" alt="支付宝"/><div class="post-qr-code__desc">支付宝</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2019/04/25/%E6%9F%94%E6%83%85%E4%BC%BC%E6%B0%B4-%E4%BD%B3%E6%9C%9F%E5%A6%82%E6%A2%A6/"><img class="prev_cover lazyload" data-src="https://i.loli.net/2019/04/25/5cc1c2c9c7cbe.png" onerror="onerror=null;src='https://cdn.jsdelivr.net/gh/ZOFOA/zofoa.github.io@latest/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">柔情似水 佳期如梦</div></div></a></div></nav><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div id="lv-container" data-id="city" data-uid="MTAyMC80MzgzNS8yMDM3MA=="><script>(function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+})(document, 'script');</script></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 By ZOFOA</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div><div class="footer_custom_text">宁静致远. The quieter you become, the more you are able to hear.</div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" target="_blank" rel="noopener" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script id="ribbon_piao" mobile="false" src="/js/third-party/piao.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@latest/lazysizes.min.js" async=""></script><script src="/js/third-party/click_heart.js"></script><script src="/js/search/local-search.js"></script></body></html>
