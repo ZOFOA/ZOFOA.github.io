@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zofoa.github.io/"/>
-  <updated>2020-06-22T16:36:32.000Z</updated>
+  <updated>2020-12-29T07:40:44.000Z</updated>
   <id>https://zofoa.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2020年个人年度总结</title>
+    <link href="https://zofoa.github.io/2020/12/29/2020%E4%B8%AA%E4%BA%BA%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/"/>
+    <id>https://zofoa.github.io/2020/12/29/2020%E4%B8%AA%E4%BA%BA%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/</id>
+    <published>2020-12-29T07:34:04.000Z</published>
+    <updated>2020-12-29T07:40:44.000Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="2020年个人工作总结"><a href="#2020年个人工作总结" class="headerlink" title="2020年个人工作总结"></a>2020年个人工作总结</h2><p>2020年，在质控部工作已经一年了，在这一年的时间中有收获、有成长。2020年已接近尾声了，总结我这一年的工作，总的来说是探索、责任、担当、忙碌。</p><p>来到新的部门，对于之前从事技术、测评工作的我质量管理完全是零起点，相关质量管理制度、流程办法都需要一点一点的去学习、探索。在新的部门中，我主要职责是完成项目质量评审工作，参与团队质量管理体系建设、质量考评等相关工作，在程老师的带领下，熟悉了质量管理工作的严谨公正、责任担当的精神。</p><p>今年，除了完成本职工作外，还参与了测评部的现场测评工作，带领小组完成项目测评。在测评项目中，担任项目负责人深感责任重大，现场需要协调一切事情，遇到自己不会的需要自己去不断学习，去提高自己的能力，去更好的解决问题。通过今年的项目现场测评实施，锻炼了自己，有成长、有收获，完全体会到了项目负责人的责任担当、技术实力、项目控制、沟通协调等能力要求。</p><p>在下半年中，是忙碌的，为能够保证测评部完成测评项目，从7月份开始陆续支援测评部开展项目测评，同时质控部的相关事情也要同时进行，在这个过程中总的来说是好的，但还是出现了一些不好、有待提高的事情。由于工作的性质比较特殊，工作中细节比较重要，往往被忽略的一个小小的问题可能就会造成一些安全隐患，所以在以后的工作中，我一定要认真对待每一件事情，做到积极、认真、负责。</p><p>回顾这一年，有失败、有成长、有收获，虽然没有真正意义上提高整体质量水平，但规范了质量管理的制度、方式、流程及标准，填补了公司之前的空白，希望在2021年质量控制工作更上一层楼。最后还是感谢，感谢公司提供这个良好工作平台，感谢领导和同事的支持和帮助。</p><h2 id="2021年工作目标计划"><a href="#2021年工作目标计划" class="headerlink" title="2021年工作目标计划"></a>2021年工作目标计划</h2><p>时间在流逝，世界在发展，外部因素越来越严峻，在这种形式下，只有严格要求自己，不断的学习提升自己，才会跟上世界的脚步。</p><p>居安思危，未雨绸缪，越是在繁荣昌盛之时，越要保持冷静，越是身处太平盛世，越要提高忧患意识。思则有备、有备无患，坚持末雨绸缪，才能在飞速前进的脚步中成长，在新的一年中，我要认真工作，完善自己，抱着忧患意识，争取做好每一件事情。</p><p>不忘初心，励志前行，希望不要忘记自己的最初意志，做到事前担责、事中尽责、事后负责，向着自己的梦想奋力前行。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+    
+      <category term="2020" scheme="https://zofoa.github.io/categories/2020/"/>
+    
+    
+      <category term="年度总结" scheme="https://zofoa.github.io/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
   
   <entry>
     <title>Word文档错别字检查工具</title>
