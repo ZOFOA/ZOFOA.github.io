@@ -1,0 +1,232 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>安卓APP证书签名验证 | ZOFOA</title><meta name="description" content="安卓APP证书签名验证"><meta name="keywords" content="Android,证书签名"><meta name="author" content="ZOFOA"><meta name="copyright" content="ZOFOA"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.ico"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="安卓APP证书签名验证"><meta name="twitter:description" content="安卓APP证书签名验证"><meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/ZOFOA/zofoa.github.io@latest/img/8.png"><meta property="og:type" content="article"><meta property="og:title" content="安卓APP证书签名验证"><meta property="og:url" content="https://zofoa.github.io/2021/04/20/%E5%AE%89%E5%8D%93app%E8%AF%81%E4%B9%A6%E7%AD%BE%E5%90%8D%E9%AA%8C%E8%AF%81/"><meta property="og:site_name" content="ZOFOA"><meta property="og:description" content="安卓APP证书签名验证"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/ZOFOA/zofoa.github.io@latest/img/8.png"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="https://zofoa.github.io/2021/04/20/%E5%AE%89%E5%8D%93app%E8%AF%81%E4%B9%A6%E7%AD%BE%E5%90%8D%E9%AA%8C%E8%AF%81/"><link rel="prev" title="华为交换机配置" href="https://zofoa.github.io/2021/04/20/%E5%8D%8E%E4%B8%BA%E4%BA%A4%E6%8D%A2%E6%9C%BA%E9%85%8D%E7%BD%AE/"><link rel="next" title="2020年个人年度总结" href="https://zofoa.github.io/2020/12/29/2020%E4%B8%AA%E4%BA%BA%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://zofoa.github.io/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: true  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="ZOFOA" type="application/atom+xml">
+</head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/ZOFOA/zofoa.github.io@latest/img/avatar.png" onerror="onerror=null;src='https://cdn.jsdelivr.net/gh/ZOFOA/zofoa.github.io@latest/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">13</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">14</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">4</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="http://192.168.0.128:5000" target="_blank" rel="noopener"><i class="fa-fw fa fa-hdd-o"></i><span> NAS</span></a></li><li><a class="site-page" href="http://192.168.0.128:9001" target="_blank" rel="noopener"><i class="fa-fw fa fa-book"></i><span> Calibre</span></a></li><li><a class="site-page" href="http://192.168.0.128:30000" target="_blank" rel="noopener"><i class="fa-fw fa fa-gitlab"></i><span> Gitlab</span></a></li><li><a class="site-page" href="http://192.168.0.128/wordpress" target="_blank" rel="noopener"><i class="fa-fw fa fa-wordpress"></i><span> WP</span></a></li></ul></div></div></div></div><i class="fa fa-arrow-right on" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#安卓APP证书签名验证"><span class="toc-number">1.</span> <span class="toc-text">安卓APP证书签名验证</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、签名验证"><span class="toc-number">1.1.</span> <span class="toc-text">一、签名验证</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法一-keytool-只支持V1签名校验"><span class="toc-number">1.1.1.</span> <span class="toc-text">方法一(keytool,只支持V1签名校验)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法二-apksigner-支持V1和V2签名校验"><span class="toc-number">1.1.2.</span> <span class="toc-text">方法二(apksigner,支持V1和V2签名校验)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、工具介绍"><span class="toc-number">1.2.</span> <span class="toc-text">二、工具介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-V1和V2签名的区别"><span class="toc-number">1.2.1.</span> <span class="toc-text">1.V1和V2签名的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-zipalign和V2签名"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.zipalign和V2签名</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、签名步骤"><span class="toc-number">1.3.</span> <span class="toc-text">三、签名步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-生成密钥对-已有密钥库-可忽略"><span class="toc-number">1.3.1.</span> <span class="toc-text">1.生成密钥对(已有密钥库,可忽略)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-查看密钥库"><span class="toc-number">1.3.2.</span> <span class="toc-text">2.查看密钥库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-签名"><span class="toc-number">1.3.3.</span> <span class="toc-text">3.签名</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#方法一-jarsigner-只支持V1签名"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">方法一(jarsigner,只支持V1签名)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法二-apksigner-默认同时使用V1和V2签名"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">方法二(apksigner,默认同时使用V1和V2签名)</span></a></li></ol></li></ol></li></ol></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(https://cdn.jsdelivr.net/gh/ZOFOA/zofoa.github.io@latest/img/8.png)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">ZOFOA</a></span><span class="pull_right menus"><div id="search_button"><a class="site-page social-icon search"><i class="fa fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="http://192.168.0.128:5000" target="_blank" rel="noopener"><i class="fa-fw fa fa-hdd-o"></i><span> NAS</span></a></li><li><a class="site-page" href="http://192.168.0.128:9001" target="_blank" rel="noopener"><i class="fa-fw fa fa-book"></i><span> Calibre</span></a></li><li><a class="site-page" href="http://192.168.0.128:30000" target="_blank" rel="noopener"><i class="fa-fw fa fa-gitlab"></i><span> Gitlab</span></a></li><li><a class="site-page" href="http://192.168.0.128/wordpress" target="_blank" rel="noopener"><i class="fa-fw fa fa-wordpress"></i><span> WP</span></a></li></ul></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">安卓APP证书签名验证</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2021-04-20 10:46:19"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2021-04-20</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2021-04-28 14:09:50"><i class="fa fa-history" aria-hidden="true"></i> 更新于 2021-04-28</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E7%AD%89%E4%BF%9D2-0/">等保2.0</a></span></div><div class="meta-secondline"> <span class="post-meta-wordcount"><i class="post-meta__icon fa fa-file-word-o" aria-hidden="true"></i><span>字数总计:</span><span class="word-count">1.6k</span><span class="post-meta__separator">|</span><i class="post-meta__icon fa fa-clock-o" aria-hidden="true"></i><span>阅读时长: 6 分钟</span></span></div><div class="meta-thirdline"><span class="post-meta-pv-cv"><span class="post-meta__separator">|</span><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div id="article-container"><h1 id="安卓APP证书签名验证"><a href="#安卓APP证书签名验证" class="headerlink" title="安卓APP证书签名验证"></a>安卓APP证书签名验证</h1><h2 id="一、签名验证"><a href="#一、签名验证" class="headerlink" title="一、签名验证"></a>一、签名验证</h2><h3 id="方法一-keytool-只支持V1签名校验"><a href="#方法一-keytool-只支持V1签名校验" class="headerlink" title="方法一(keytool,只支持V1签名校验)"></a><strong>方法一(keytool,只支持V1签名校验)</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">keytool -printcert -jarfile C:\Users\zhfe\Desktop\b953d9cfc2d9b0f423eee2354ae0c9e1.apk</span><br><span class="line"></span><br><span class="line">keytool -printcert -jarfile MyApp.apk (显示签名证书信息)</span><br></pre></td></tr></table></figure>
+
+<p>参数:</p>
+<blockquote>
+<p>​    -printcert      打印证书内容<br>​    -jarfile <filename> 已签名的jar文件 或apk文件 </p>
+</blockquote>
+<p><img src="/" class="lazyload" data-src="https://cdn.jsdelivr.net/gh/ZOFOA/zofoa.github.io@latest/img/Untitled.assets/image-20210420102241917.png"  alt="image-20210420102241917"></p>
+<p><strong>这是一个X.509 v3证书。包含如下内容：</strong></p>
+<ul>
+<li><p><strong>owner所有者：公钥持有者</strong></p>
+</li>
+<li><p><strong>issuer颁发者：为公钥提供保证的人</strong></p>
+</li>
+<li><p><strong>serial number序列号：证书唯一标识</strong></p>
+</li>
+<li><p><strong>valid from … until有效期：证书有效期，作为证书有效性验证</strong></p>
+</li>
+<li><p><strong>certification fingerprints证书指纹：证书数字校验和，验证是否被篡改</strong></p>
+<p>其中与app相关的签名是 cert.sf 文件，可以使用 cat 命令查看</p>
+<p>两个文件都列出了各个资源文件的hash值，并经过了base64编码</p>
+</li>
+</ul>
+<p><strong>三个文件的具体内容以及作用：</strong></p>
+<p>​        解压apk，META-INF包含.MF、.RSA、.SF三个文件</p>
+<ul>
+<li><strong>manifest.mf: 声明资源</strong></li>
+<li><strong>cert.rsa: 公钥证书</strong></li>
+<li><strong>cert.sf: 包含app所有资源，负责对app签名，包含jar指定的密码学意义上的签名</strong></li>
+</ul>
+<h3 id="方法二-apksigner-支持V1和V2签名校验"><a href="#方法二-apksigner-支持V1和V2签名校验" class="headerlink" title="方法二(apksigner,支持V1和V2签名校验)"></a><strong>方法二(apksigner,支持V1和V2签名校验)</strong></h3><p>  进入Android SDK/build-tools/SDK版本, 输入命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apksigner verify -v --print-certs xxx.apk</span><br></pre></td></tr></table></figure>
+
+<p>  参数:</p>
+<blockquote>
+<p>​    -v, –verbose 显示详情(显示是否使用V1和V2签名)<br>​    –print-certs 显示签名证书信息</p>
+</blockquote>
+<p>  例如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apksigner verify -v MyApp.apk</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>​    Verifies<br>​    Verified using v1 scheme (JAR signing): true<br>​    Verified using v2 scheme (APK Signature Scheme v2): true<br>​    Number of signers: 1</p>
+</blockquote>
+<h2 id="二、工具介绍"><a href="#二、工具介绍" class="headerlink" title="二、工具介绍"></a><strong>二、工具介绍</strong></h2><p>jarsigner是JDK提供的针对jar包签名的通用工具,</p>
+<p>位于JDK/bin/jarsigner.exe</p>
+<p>apksigner是Google官方提供的针对Android apk签名及验证的专用工具,</p>
+<p>位于Android SDK/build-tools/SDK版本/apksigner.bat</p>
+<p>不管是apk包,还是jar包,本质都是zip格式的压缩包,所以它们的签名过程都差不多(仅限V1签名),</p>
+<p>以上两个工具都可以对Android apk包进行签名.</p>
+<h3 id="1-V1和V2签名的区别"><a href="#1-V1和V2签名的区别" class="headerlink" title="1.V1和V2签名的区别"></a><strong>1.V1和V2签名的区别</strong></h3><p>在Android Studio中点击菜单 Build-&gt;Generate signed apk… 打包签名过程中,</p>
+<p>可以看到两种签名选项 V1(Jar Signature) V2(Full APK Signature),</p>
+<p>刚开始升级AS看到这个懵了,既然是APK Signature,就放心偷懒选了V2,结果安装失败？？？无奈,只能查资料…</p>
+<p>从Android 7.0开始, 谷歌增加新签名方案 V2 Scheme (APK Signature);</p>
+<p>但Android 7.0以下版本, 只能用旧签名方案 V1 scheme (JAR signing)</p>
+<p>V1签名:</p>
+<ul>
+<li>来自JDK(jarsigner), 对zip压缩包的每个文件进行验证, 签名后还能对压缩包修改(移动/重新压缩文件)</li>
+<li>对V1签名的apk/jar解压,在META-INF存放签名文件(MANIFEST.MF, CERT.SF, CERT.RSA),</li>
+<li>其中MANIFEST.MF文件保存所有文件的SHA1指纹(除了META-INF文件), 由此可知: V1签名是对压缩包中单个文件签名验证</li>
+</ul>
+<p>V2签名:</p>
+<ul>
+<li>来自Google(apksigner), 对zip压缩包的整个文件验证, 签名后不能修改压缩包(包括zipalign),</li>
+<li>对V2签名的apk解压,没有发现签名文件,重新压缩后V2签名就失效, 由此可知: V2签名是对整个APK签名验证</li>
+</ul>
+<p>V2签名优点很明显:</p>
+<ul>
+<li>签名更安全(不能修改压缩包)</li>
+<li>签名验证时间更短(不需要解压验证),因而安装速度加快</li>
+</ul>
+<p><strong>注意:</strong> apksigner工具默认同时使用V1和V2签名,以兼容Android 7.0以下版本</p>
+<h3 id="2-zipalign和V2签名"><a href="#2-zipalign和V2签名" class="headerlink" title="2.zipalign和V2签名"></a><strong>2.zipalign和V2签名</strong></h3><p>位于Android SDK/build-tools/SDK版本/zipalign.exe</p>
+<p>zipalign 是对zip包对齐的工具,使APK包内未压缩的数据有序排列对齐,从而减少APP运行时内存消耗</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zipalign -v &#96;&#96;4&#96; &#96;in.apk out.apk &#96;&#96;&#x2F;&#x2F;4字节对齐优化&#96;&#96;zipalign -c -v &#96;&#96;4&#96; &#96;in.apk &#96;&#96;&#x2F;&#x2F;检查APK是否对齐</span><br></pre></td></tr></table></figure>
+
+<p>zipalign可以在V1签名后执行</p>
+<p>但zipalign不能在V2签名后执行,只能在V2签名之前执行！！！</p>
+<h2 id="三、签名步骤"><a href="#三、签名步骤" class="headerlink" title="三、签名步骤"></a><strong>三、签名步骤</strong></h2><h3 id="1-生成密钥对-已有密钥库-可忽略"><a href="#1-生成密钥对-已有密钥库-可忽略" class="headerlink" title="1.生成密钥对(已有密钥库,可忽略)"></a><strong>1.生成密钥对(已有密钥库,可忽略)</strong></h3><p>Eclipse或Android Studio在Debug时,对App签名都会使用一个默认的密钥库:</p>
+<ul>
+<li>默认在C:\Users\用户名.android\debug.keystore</li>
+<li>密钥库名:  debug.keystore</li>
+<li>密钥别名:  androiddebugkey</li>
+<li>密钥库密码: android</li>
+</ul>
+<p><strong>生成密钥对</strong></p>
+<p>  进入JDK/bin, 输入命令 </p>
+<p>  keytool -genkeypair -keystore 密钥库名 -alias 密钥别名 -validity 天数 -keyalg RSA</p>
+<p>  参数:</p>
+<blockquote>
+<p>​    -genkeypair 生成一条密钥对(由私钥和公钥组成)<br>​    -keystore  密钥库名字以及存储位置(默认当前目录)<br>​    -alias    密钥对的别名(密钥库可以存在多个密钥对,用于区分不同密钥对)<br>​    -validity  密钥对的有效期(单位: 天)<br>​    -keyalg   生成密钥对的算法(常用RSA/DSA,DSA只用于签名,默认采用DSA)<br>​    -delete   删除一条密钥</p>
+</blockquote>
+<p>  提示: 可重复使用此条命令,在同一密钥库中创建多条密钥对</p>
+<p>  例如:   </p>
+<p>​    在debug.keystore中新增一对密钥,别名是release</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -genkeypair -keystore debug.keystore -alias release -validity 30000</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-查看密钥库"><a href="#2-查看密钥库" class="headerlink" title="2.查看密钥库"></a><strong>2.查看密钥库</strong></h3><p>  进入JDK/bin, 输入命令</p>
+<p>  keytool -list -v -keystore 密钥库名</p>
+<p>  参数:</p>
+<blockquote>
+<p>​    -list 查看密钥列表<br>​    -v  查看密钥详情</p>
+</blockquote>
+<p>  例如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -list -v -keystore debug.keystore</span><br></pre></td></tr></table></figure>
+
+<p>​    现在debug.keystore密钥库中有两对密钥, 别名分别是androiddebugkey release</p>
+<h3 id="3-签名"><a href="#3-签名" class="headerlink" title="3.签名"></a><strong>3.签名</strong></h3><h4 id="方法一-jarsigner-只支持V1签名"><a href="#方法一-jarsigner-只支持V1签名" class="headerlink" title="方法一(jarsigner,只支持V1签名)"></a><strong>方法一(jarsigner,只支持V1签名)</strong></h4><p>  进入JDK/bin, 输入命令</p>
+<p>  jarsigner -keystore 密钥库名 xxx.apk 密钥别名</p>
+<p>  从JDK7开始, jarsigner默认算法是SHA256, 但Android 4.2以下不支持该算法,</p>
+<p>  所以需要修改算法, 添加参数 -digestalg SHA1 -sigalg SHA1withRSA</p>
+<p>  jarsigner -keystore 密钥库名 -digestalg SHA1 -sigalg SHA1withRSA xxx.apk 密钥别名</p>
+<p>  参数:</p>
+<blockquote>
+<p>​    -digestalg 摘要算法<br>​    -sigalg   签名算法</p>
+</blockquote>
+<p>  例如:</p>
+<p>​    用JDK7及以上jarsigner签名,不支持Android 4.2 以下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jarsigner -keystore debug.keystore MyApp.apk androiddebugkey</span><br></pre></td></tr></table></figure>
+
+<p>​    用JDK7及以上jarsigner签名,兼容Android 4.2 以下      </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jarsigner -keystore debug.keystore -digestalg SHA1 -sigalg SHA1withRSA MyApp.apk androiddebugkey</span><br></pre></td></tr></table></figure>
+
+<h4 id="方法二-apksigner-默认同时使用V1和V2签名"><a href="#方法二-apksigner-默认同时使用V1和V2签名" class="headerlink" title="方法二(apksigner,默认同时使用V1和V2签名)"></a><strong>方法二(apksigner,默认同时使用V1和V2签名)</strong></h4><p>  进入Android SDK/build-tools/SDK版本, 输入命令</p>
+<p>  apksigner sign –ks 密钥库名 –ks-key-alias 密钥别名 xxx.apk</p>
+<p>  若密钥库中有多个密钥对,则必须指定密钥别名</p>
+<p>  apksigner sign –ks 密钥库名 –ks-key-alias 密钥别名 xxx.apk</p>
+<p>  禁用V2签名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apksigner sign --v2-signing-enabled &#96;&#96;false&#96; &#96;--ks 密钥库名 xxx.apk</span><br></pre></td></tr></table></figure>
+
+<p>  参数:</p>
+<blockquote>
+<p>​    –ks-key-alias    密钥别名,若密钥库有一个密钥对,则可省略,反之必选<br>​    –v1-signing-enabled 是否开启V1签名,默认开启<br>​    –v2-signing-enabled 是否开启V2签名,默认开启</p>
+</blockquote>
+<p>  例如:</p>
+<p>​    在debug.keystore密钥库只有一个密钥对</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apksigner sign --ks debug.keystore MyApp.apk</span><br></pre></td></tr></table></figure>
+
+<p>​    在debug.keystore密钥库中有多个密钥对,所以必须指定密钥别名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apksigner sign --ks debug.keystore --ks-key-alias androiddebugkey MyApp.apk</span><br></pre></td></tr></table></figure>
+
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ZOFOA</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://zofoa.github.io/2021/04/20/%E5%AE%89%E5%8D%93app%E8%AF%81%E4%B9%A6%E7%AD%BE%E5%90%8D%E9%AA%8C%E8%AF%81/">https://zofoa.github.io/2021/04/20/安卓app证书签名验证/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://zofoa.github.io" target="_blank">ZOFOA</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Android/">Android</a><a class="post-meta__tags" href="/tags/%E8%AF%81%E4%B9%A6%E7%AD%BE%E5%90%8D/">证书签名</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/ZOFOA/zofoa.github.io@latest/img/3.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="lazyload post-qr-code__img" src="https://cdn.jsdelivr.net/gh/ZOFOA/zofoa.github.io@latest/img/wechat.jpg" alt="微信"/><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="lazyload post-qr-code__img" src="https://cdn.jsdelivr.net/gh/ZOFOA/zofoa.github.io@latest/img/alipay.jpg" alt="支付宝"/><div class="post-qr-code__desc">支付宝</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2021/04/20/%E5%8D%8E%E4%B8%BA%E4%BA%A4%E6%8D%A2%E6%9C%BA%E9%85%8D%E7%BD%AE/"><img class="prev_cover lazyload" data-src="https://cdn.jsdelivr.net/gh/ZOFOA/zofoa.github.io@latest/img/6.png" onerror="onerror=null;src='https://cdn.jsdelivr.net/gh/ZOFOA/zofoa.github.io@latest/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">华为交换机配置</div></div></a></div><div class="next-post pull_right"><a href="/2020/12/29/2020%E4%B8%AA%E4%BA%BA%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/"><img class="next_cover lazyload" data-src="https://cdn.jsdelivr.net/gh/ZOFOA/zofoa.github.io@latest/img/3.png" onerror="onerror=null;src='https://cdn.jsdelivr.net/gh/ZOFOA/zofoa.github.io@latest/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">2020年个人年度总结</div></div></a></div></nav><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div id="lv-container" data-id="city" data-uid="MTAyMC80MzgzNS8yMDM3MA=="><script>(function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+})(document, 'script');</script></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By ZOFOA</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div><div class="footer_custom_text">宁静致远. The quieter you become, the more you are able to hear.</div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" target="_blank" rel="noopener" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script id="ribbon_piao" mobile="false" src="/js/third-party/piao.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@latest/lazysizes.min.js" async=""></script><script src="/js/third-party/click_heart.js"></script><script src="/js/search/local-search.js"></script></body></html>
